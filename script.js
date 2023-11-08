@@ -1,27 +1,25 @@
-const celciusEl = document.getElementById("Celcius");
-const fahrenheitEl = document.getElementById("Fahrenheit");
-const kelvinEl = document.getElementById("Kelvin");
+const calculateTemp = () => {
+    const inputTemp = document.getElementById('temp').value;
 
-function computeTemp(event) {
-    const currentValue = event.target.value;
+    const tempSelected = document.getElementById('temp_diff');
+    const valueTemp = temp_diff.options[tempSelected.selectedIndex].value;
 
-    switch (event.target.name) {
-        case "Celcius":
-            fahrenheitEl.value = (currentValue * 9 / 5) + 32;
-            kelvinEl.value = parseFloat(currentValue) + 273.15;
-            break;
+    // Celsius to Fahrenheit
+    const celToFah = (cel) => {
+        let fahrenheit = ((cel * 9 / 5) + 32).toFixed(1);
+        return fahrenheit;
+    }
 
-        case "Fahrenheit":
-            celciusEl.value = (currentValue - 32) * 5 / 9;
-            kelvinEl.value = (currentValue - 32) * 5 / 9 + 273.15;
-            break;
+    // Fahrenheit to Celsius
+    const fahToCel = (fah) => {
+        let celsius = ((fah - 32) * 5 / 9).toFixed(1);
+        return celsius;
+    }
 
-        case "Kelvin":
-            celciusEl.value = currentValue - 273.15;
-            fahrenheitEl.value = (currentValue - 273.15) * 9 / 5 + 32;
-            break;
-
-        default:
-            break;
+    if (valueTemp == 'cel') {
+        document.getElementById("result").innerHTML = celToFah(inputTemp) + "&#176; Fahrenheit";
+    }
+    else {
+        document.getElementById("result").innerHTML = fahToCel(inputTemp) + "&#176; Celsius";
     }
 }
